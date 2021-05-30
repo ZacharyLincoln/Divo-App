@@ -1,4 +1,4 @@
-name: divo
+name: Divo
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -33,10 +33,19 @@ dependencies:
   rflutter_alert: ^2.0.2
   http: ^0.13.3
   shared_preferences: ^2.0.6
+  flutter_launcher_icons: ^0.9.0
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "lib/assets/DivoAppIcon.png"
+  ios: true
+  image_path: "lib/assets/DivoAppIcon.png"
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
