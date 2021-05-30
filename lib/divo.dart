@@ -21,7 +21,6 @@ class _DivoState extends State<Divo> {
   Color white = Colors.white;
   Color black = Colors.black;
 
-
   String api = "https://vast-refuge-05196.herokuapp.com/";
   //String api = "http://10.0.0.4:5000/";
 
@@ -154,15 +153,13 @@ class _DivoState extends State<Divo> {
     editSymbolControllers.add(new TextEditingController());
 
     return Container(
-
       width: 150,
       height: 150,
       decoration: BoxDecoration(
-        color: Color(0xff616F39),
-
+        color: black,
         border: Border.all(
-          width: 10,
-          color: Color(0xff3D432B),
+          width: 5,
+          color: darkBrightGreen,
         ),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10),
@@ -178,16 +175,20 @@ class _DivoState extends State<Divo> {
           Text(
             "$symbol",
             style: GoogleFonts.lato(
-                color: Color(0xffA7D129),
-                fontSize: 25,
-                fontWeight: FontWeight.bold),
+                color: brightGreen, fontSize: 25, fontWeight: FontWeight.bold),
           ),
-          Text("\$$divPerShare/share"),
-          Text("$amount shares"),
+          Text(
+            "\$$divPerShare/share",
+            style: GoogleFonts.lato(color: white),
+          ),
+          Text(
+            "$amount shares",
+            style: GoogleFonts.lato(color: white),
+          ),
           Text(
             "\$$divPerMonthTotal/mo",
             style: GoogleFonts.rubik(
-              color: Color(0xffA7D129),
+              color: brightGreen,
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
@@ -198,30 +199,84 @@ class _DivoState extends State<Divo> {
             child: IconButton(
               padding: EdgeInsets.zero,
               icon: Icon(Icons.edit),
+              color: white,
               onPressed: () {
+                editSymbolControllers[i].text = stocks[i].toUpperCase();
+                editAmountControllers[i].text = amounts[i].toString();
                 Alert(
                   context: context,
                   title: "Edit Stock",
                   desc: "Change the info below.",
-                  content: Column(
-                    children: [
-                      TextField(
-                        decoration: InputDecoration(labelText: "Symbol"),
-                        controller: editSymbolControllers[i],
-                      ),
-                      TextField(
-                        decoration:
-                            InputDecoration(labelText: "Amount of shares"),
-                        controller: editAmountControllers[i],
-                      ),
-                    ],
+
+                  style: AlertStyle(
+                    backgroundColor: black,
+                    descStyle: GoogleFonts.lato(
+                      color: white,
+                      fontSize: 25,
+                    ),
+                    titleStyle: GoogleFonts.lato(
+                      color: white,
+                      fontSize: 35,
+                    ),
+                    alertBorder: Border.all(
+                      color: darkBrightGreen,
+                      width: 5,
+                    ),
+                  ),
+                  content: Container(
+                    child: Column(
+                      children: [
+                        TextField(
+                          style: GoogleFonts.lato(
+                            color: white,
+                            fontSize: 25,
+                          ),
+                          decoration: InputDecoration(
+                              labelText: "Symbol",
+                              labelStyle: TextStyle(color: brightGreen),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                          ),
+                          controller: editSymbolControllers[i],
+                        ),
+                        TextField(
+                          style: GoogleFonts.lato(
+                            color: white,
+                            fontSize: 25,
+                          ),
+                          decoration: InputDecoration(
+                            labelText: "Amount",
+                            labelStyle: TextStyle(color: brightGreen),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                          ),
+                          controller: editAmountControllers[i],
+                        ),
+                      ],
+                    ),
                   ),
                   buttons: [
                     DialogButton(
+                      color: darkBrightGreen,
                       child: Text(
                         "Edit",
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(color: white, fontSize: 20),
                       ),
+                      radius: BorderRadius.circular(0.0),
                       onPressed: () {
                         if (editSymbolControllers[i].text != "") {
                           stocks[i] = editSymbolControllers[i].text;
@@ -244,9 +299,10 @@ class _DivoState extends State<Divo> {
                         });
                         Navigator.pop(context);
                       },
-                      radius: BorderRadius.circular(0.0),
+
                     ),
                     DialogButton(
+                      color: darkBrightGreen,
                       child: Text(
                         "Delete",
                         style: TextStyle(color: Colors.white, fontSize: 20),
@@ -283,14 +339,13 @@ class _DivoState extends State<Divo> {
     editSymbolControllers.add(new TextEditingController());
 
     return Container(
-
       width: 150,
       height: 150,
       decoration: BoxDecoration(
-        color: Color(0xff616F39),
+        color: black,
         border: Border.all(
-          width: 10,
-          color: Color(0xff3D432B),
+          width: 5,
+          color: darkBrightGreen,
         ),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10),
@@ -306,17 +361,22 @@ class _DivoState extends State<Divo> {
           Text(
             "$symbol",
             style: GoogleFonts.lato(
-                color: Color(0xffA7D129),
-                fontSize: 25,
-                fontWeight: FontWeight.bold),
+                color: brightGreen, fontSize: 25, fontWeight: FontWeight.bold),
           ),
-          AutoSizeText("Loading.../share", maxLines: 1,),
-          Text("$amount shares"),
           AutoSizeText(
-            "Loading.../mo",
+            "Loading..../share",
+            maxLines: 1,
+            style: GoogleFonts.lato(color: white),
+          ),
+          Text(
+            "$amount shares",
+            style: GoogleFonts.lato(color: white),
+          ),
+          AutoSizeText(
+            "Loading..../mo",
             maxLines: 1,
             style: GoogleFonts.rubik(
-              color: Color(0xffA7D129),
+              color: brightGreen,
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
@@ -327,30 +387,84 @@ class _DivoState extends State<Divo> {
             child: IconButton(
               padding: EdgeInsets.zero,
               icon: Icon(Icons.edit),
+              color: white,
               onPressed: () {
+                editSymbolControllers[i].text = stocks[i].toUpperCase();
+                editAmountControllers[i].text = amounts[i].toString();
                 Alert(
                   context: context,
                   title: "Edit Stock",
                   desc: "Change the info below.",
-                  content: Column(
-                    children: [
-                      TextField(
-                        decoration: InputDecoration(labelText: "Symbol"),
-                        controller: editSymbolControllers[i],
-                      ),
-                      TextField(
-                        decoration:
-                        InputDecoration(labelText: "Amount of shares"),
-                        controller: editAmountControllers[i],
-                      ),
-                    ],
+
+                  style: AlertStyle(
+                    backgroundColor: black,
+                    descStyle: GoogleFonts.lato(
+                      color: white,
+                      fontSize: 25,
+                    ),
+                    titleStyle: GoogleFonts.lato(
+                      color: white,
+                      fontSize: 35,
+                    ),
+                    alertBorder: Border.all(
+                      color: darkBrightGreen,
+                      width: 5,
+                    ),
+                  ),
+                  content: Container(
+                    child: Column(
+                      children: [
+                        TextField(
+                          style: GoogleFonts.lato(
+                            color: white,
+                            fontSize: 25,
+                          ),
+                          decoration: InputDecoration(
+                            labelText: "Symbol",
+                            labelStyle: TextStyle(color: brightGreen),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                          ),
+                          controller: editSymbolControllers[i],
+                        ),
+                        TextField(
+                          style: GoogleFonts.lato(
+                            color: white,
+                            fontSize: 25,
+                          ),
+                          decoration: InputDecoration(
+                            labelText: "Amount",
+                            labelStyle: TextStyle(color: brightGreen),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                          ),
+                          controller: editAmountControllers[i],
+                        ),
+                      ],
+                    ),
                   ),
                   buttons: [
                     DialogButton(
+                      color: darkBrightGreen,
                       child: Text(
                         "Edit",
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(color: white, fontSize: 20),
                       ),
+                      radius: BorderRadius.circular(0.0),
                       onPressed: () {
                         if (editSymbolControllers[i].text != "") {
                           stocks[i] = editSymbolControllers[i].text;
@@ -373,9 +487,10 @@ class _DivoState extends State<Divo> {
                         });
                         Navigator.pop(context);
                       },
-                      radius: BorderRadius.circular(0.0),
+
                     ),
                     DialogButton(
+                      color: darkBrightGreen,
                       child: Text(
                         "Delete",
                         style: TextStyle(color: Colors.white, fontSize: 20),
@@ -412,30 +527,8 @@ class _DivoState extends State<Divo> {
     }
   }
 
-  setUpCards() {
-    monthlyDiv = 0.0;
-    yearlyDiv = 0.0;
-
-    for (int i = 0; i < monthlyDivsPerShare.length; i++) {
-      monthlyDiv += (monthlyDivsPerShare[i] * amounts[i]);
-      yearlyDiv += (monthlyDivsPerShare[i] * amounts[i]) * 12;
-    }
-
-    monthlyDiv = double.parse(monthlyDiv.toStringAsFixed(2));
-    yearlyDiv = double.parse(yearlyDiv.toStringAsFixed(2));
-
-    assetValue = 0;
-    for (int i = 0; i < amounts.length; i++) {
-      assetValue += price[i] * amounts[i];
-    }
-
-    assetValue = double.parse(assetValue.toStringAsFixed(2));
-
-    avgAPY = ((yearlyDiv / assetValue) * 100.0).toStringAsFixed(3);
-
-    cards = [];
-
-    cards.add(PreferredSize(
+  Widget getAppBar() {
+    return PreferredSize(
       preferredSize: Size(double.infinity, 300),
       child: Container(
         margin: EdgeInsets.all(0),
@@ -466,7 +559,7 @@ class _DivoState extends State<Divo> {
                       "Divo",
                       style: GoogleFonts.rubik(
                         fontWeight: FontWeight.bold,
-                        color: Color(0xffA7D129),
+                        color: brightGreen,
                         fontSize: 35,
                       ),
                     ),
@@ -478,7 +571,7 @@ class _DivoState extends State<Divo> {
                       "The Monthly Dividend Calculator",
                       maxLines: 1,
                       style: GoogleFonts.lato(
-                        color: Color(0xff616F39),
+                        color: white,
                         fontSize: 25,
                       ),
                     ),
@@ -489,14 +582,14 @@ class _DivoState extends State<Divo> {
                       text: TextSpan(
                           text: "\$$assetValue",
                           style: GoogleFonts.lato(
-                            color: Color(0xffA7D129),
+                            color: brightGreen,
                             fontSize: 20,
                           ),
                           children: [
                             TextSpan(
                               text: " current asset value",
                               style: GoogleFonts.lato(
-                                color: Color(0xff616F39),
+                                color: white,
                                 fontSize: 20,
                               ),
                             )
@@ -509,14 +602,14 @@ class _DivoState extends State<Divo> {
                       text: TextSpan(
                           text: "$avgAPY",
                           style: GoogleFonts.lato(
-                            color: Color(0xffA7D129),
+                            color: brightGreen,
                             fontSize: 20,
                           ),
                           children: [
                             TextSpan(
                               text: " avg APY",
                               style: GoogleFonts.lato(
-                                color: Color(0xff616F39),
+                                color: white,
                                 fontSize: 20,
                               ),
                             )
@@ -529,7 +622,7 @@ class _DivoState extends State<Divo> {
                       "\$$monthlyDiv/mo",
                       style: GoogleFonts.rubik(
                         fontWeight: FontWeight.bold,
-                        color: Color(0xffA7D129),
+                        color: brightGreen,
                         fontSize: 30,
                       ),
                     ),
@@ -539,7 +632,7 @@ class _DivoState extends State<Divo> {
                     Text(
                       "\$$yearlyDiv/yr",
                       style: GoogleFonts.lato(
-                        color: Color(0xffA7D129),
+                        color: brightGreen,
                         fontSize: 20,
                       ),
                     )
@@ -550,7 +643,33 @@ class _DivoState extends State<Divo> {
           ],
         ),
       ),
-    ));
+    );
+  }
+
+  setUpCards() {
+    monthlyDiv = 0.0;
+    yearlyDiv = 0.0;
+
+    for (int i = 0; i < monthlyDivsPerShare.length; i++) {
+      monthlyDiv += (monthlyDivsPerShare[i] * amounts[i]);
+      yearlyDiv += (monthlyDivsPerShare[i] * amounts[i]) * 12;
+    }
+
+    monthlyDiv = double.parse(monthlyDiv.toStringAsFixed(2));
+    yearlyDiv = double.parse(yearlyDiv.toStringAsFixed(2));
+
+    assetValue = 0;
+    for (int i = 0; i < amounts.length; i++) {
+      assetValue += price[i] * amounts[i];
+    }
+
+    assetValue = double.parse(assetValue.toStringAsFixed(2));
+
+    avgAPY = ((yearlyDiv / assetValue) * 100.0).toStringAsFixed(3);
+
+    cards = [];
+
+    cards.add(getAppBar());
 
     for (var i = 0; i < stockcards.length; i++) {
       if (i % 2 == 0 && i + 1 < stockcards.length) {
@@ -579,8 +698,8 @@ class _DivoState extends State<Divo> {
           height: 150,
           decoration: BoxDecoration(
             border: Border.all(
-              width: 10,
-              color: Color(0xff616F39),
+              width: 5,
+              color: darkBrightGreen,
             ),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10),
@@ -596,7 +715,7 @@ class _DivoState extends State<Divo> {
               Text(
                 "Click the +",
                 style: GoogleFonts.lato(
-                    color: Color(0xff616F39),
+                    color: brightGreen,
                     fontSize: 25,
                     fontWeight: FontWeight.bold),
               ),
@@ -604,13 +723,17 @@ class _DivoState extends State<Divo> {
                 "To add your first stock!",
                 maxLines: 1,
                 style: GoogleFonts.lato(
-                    color: Color(0xff616F39),
+                    color: brightGreen,
                     fontSize: 25,
                     fontWeight: FontWeight.bold),
               ),
             ],
           )));
     }
+
+    cards.add(SizedBox(
+      height: 40,
+    ));
 
     //TODO if there is no internet inform the user to connect to the internet.
     //TODO if there are no cards add a message informing the user to click the add button on the bottom of the screen.
@@ -680,130 +803,15 @@ class _DivoState extends State<Divo> {
 
   loadingCards() {
     cards = [];
-    cards.add(PreferredSize(
-      preferredSize: Size(double.infinity, 300),
-      child: Container(
-        margin: EdgeInsets.all(0),
-        height: 300,
-        width: 440,
-        child: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Image.asset(
-                "lib/assets/appbar.png",
-                width: 400,
-                fit: BoxFit.fill,
-              ),
-            ),
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: SafeArea(
-                child: Column(
-                  children: [
-                    Text(
-                      "Divo",
-                      style: GoogleFonts.rubik(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xffA7D129),
-                        fontSize: 35,
-                      ),
-                    ),
-                    SizedBox(
-                      height: appbarspacing,
-                    ),
-                    //#616F39
-                    AutoSizeText(
-                      "The Monthly Dividend Calculator",
-                      maxLines: 1,
-                      style: GoogleFonts.lato(
-                        color: Color(0xff616F39),
-                        fontSize: 25,
-                      ),
-                    ),
-                    SizedBox(
-                      height: appbarspacing,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                          text: "\$$assetValue",
-                          style: GoogleFonts.lato(
-                            color: Color(0xffA7D129),
-                            fontSize: 20,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: " current asset value",
-                              style: GoogleFonts.lato(
-                                color: Color(0xff616F39),
-                                fontSize: 20,
-                              ),
-                            )
-                          ]),
-                    ),
-                    SizedBox(
-                      height: appbarspacing,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                          text: "$avgAPY",
-                          style: GoogleFonts.lato(
-                            color: Color(0xffA7D129),
-                            fontSize: 20,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: " avg APY",
-                              style: GoogleFonts.lato(
-                                color: Color(0xff616F39),
-                                fontSize: 20,
-                              ),
-                            )
-                          ]),
-                    ),
-                    SizedBox(
-                      height: appbarspacing,
-                    ),
-                    Text(
-                      "\$$monthlyDiv/mo",
-                      style: GoogleFonts.rubik(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xffA7D129),
-                        fontSize: 30,
-                      ),
-                    ),
-                    SizedBox(
-                      height: appbarspacing,
-                    ),
-                    Text(
-                      "\$$yearlyDiv/yr",
-                      style: GoogleFonts.lato(
-                        color: Color(0xffA7D129),
-                        fontSize: 20,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ));
+    cards.add(getAppBar());
 
     cards.add(Container(
         width: 300,
         height: 150,
         decoration: BoxDecoration(
           border: Border.all(
-            width: 10,
-            color: Color(0xff616F39),
+            width: 5,
+            color: darkBrightGreen,
           ),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10),
@@ -819,7 +827,7 @@ class _DivoState extends State<Divo> {
             Text(
               "Make Sure",
               style: GoogleFonts.lato(
-                  color: Color(0xff616F39),
+                  color: brightGreen,
                   fontSize: 25,
                   fontWeight: FontWeight.bold),
             ),
@@ -828,7 +836,7 @@ class _DivoState extends State<Divo> {
               maxLines: 2,
               textAlign: TextAlign.center,
               style: GoogleFonts.lato(
-                  color: Color(0xff616F39),
+                  color: brightGreen,
                   fontSize: 25,
                   fontWeight: FontWeight.bold),
             ),
@@ -884,21 +892,21 @@ class _DivoState extends State<Divo> {
     }
 
     return Scaffold(
-      backgroundColor: Color(0xffbfcba8),
+      backgroundColor: black,
       body: Stack(
         children: [
           Positioned(
             top: 0,
-            bottom: 85,
+            bottom: 0,
             left: 0,
             right: 0,
             child: SingleChildScrollView(
               child: Column(
-
                 children: cards,
               ),
             ),
           ),
+          /*
           Positioned(
             bottom: 0,
             left: 0,
@@ -907,12 +915,14 @@ class _DivoState extends State<Divo> {
               width: double.infinity,
               height: 50,
               decoration: BoxDecoration(
-                  color: Color(0xff616F39),
+                  color: black,
+                  border: Border.all(color: brightGreen, width: 5),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(25),
                       topRight: Radius.circular(25))),
             ),
           ),
+          */
           Positioned(
             bottom: 10,
             left: width / 2 - 50 + 25 / 2,
@@ -920,9 +930,9 @@ class _DivoState extends State<Divo> {
               height: 75,
               width: 75,
               decoration: BoxDecoration(
-                  color: Color(0xff616F39),
+                  color: darkBrightGreen,
                   border: Border.all(
-                    color: Color(0xffA7D129),
+                    //color: brightGreen,
                     width: 5,
                   ),
                   borderRadius: BorderRadius.only(
@@ -935,7 +945,7 @@ class _DivoState extends State<Divo> {
                 icon: Icon(
                   CupertinoIcons.plus,
                   size: 50,
-                  color: Color(0xffA7D129),
+                  color: white,
                 ),
                 onPressed: () {
                   setState(() {
@@ -943,21 +953,69 @@ class _DivoState extends State<Divo> {
                       context: context,
                       title: "Add Dividend Stock",
                       desc: "Enter the symbol of your stock below.",
+                      style: AlertStyle(
+                        backgroundColor: black,
+                        descStyle: GoogleFonts.lato(
+                          color: white,
+                          fontSize: 25,
+                        ),
+                        titleStyle: GoogleFonts.lato(
+                          color: white,
+                          fontSize: 35,
+                        ),
+                        alertBorder: Border.all(
+                          color: darkBrightGreen,
+                          width: 5,
+                        ),
+                      ),
                       content: Column(
+
                         children: [
                           TextField(
-                            decoration: InputDecoration(labelText: "Symbol"),
+                            style: GoogleFonts.lato(
+                              color: white,
+                              fontSize: 25,
+                            ),
+                            decoration: InputDecoration(
+                              labelText: "Symbol",
+                              labelStyle: TextStyle(color: brightGreen),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: darkBrightGreen),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: darkBrightGreen),
+                              ),
+                              border: UnderlineInputBorder(
+                                borderSide: BorderSide(color: darkBrightGreen),
+                              ),
+                            ),
                             controller: symbolController,
                           ),
                           TextField(
-                            decoration:
-                                InputDecoration(labelText: "Amount of shares"),
+                            style: GoogleFonts.lato(
+                              color: white,
+                              fontSize: 25,
+                            ),
+                            decoration: InputDecoration(
+                              labelText: "Amount Of Shares",
+                              labelStyle: TextStyle(color: brightGreen),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: darkBrightGreen),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: darkBrightGreen),
+                              ),
+                              border: UnderlineInputBorder(
+                                borderSide: BorderSide(color: darkBrightGreen),
+                              ),
+                            ),
                             controller: amountController,
                           ),
                         ],
                       ),
                       buttons: [
                         DialogButton(
+                          color: darkBrightGreen,
                           child: Text(
                             "Add",
                             style: TextStyle(color: Colors.white, fontSize: 20),
@@ -984,6 +1042,8 @@ class _DivoState extends State<Divo> {
               ),
             ),
           )
+
+
         ],
       ),
     );
