@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:http/http.dart' as http;
@@ -39,8 +40,6 @@ class _DivoState extends State<Divo> {
   String avgAPY = "";
   var monthlyDiv = 0.0;
   var yearlyDiv = 0.0;
-
-  int i = 0;
 
   final symbolController = TextEditingController();
   final amountController = TextEditingController();
@@ -152,6 +151,8 @@ class _DivoState extends State<Divo> {
     editAmountControllers.add(new TextEditingController());
     editSymbolControllers.add(new TextEditingController());
 
+    return stockTile(symbol, divPerShare.toString(), amount.toString(), divPerMonthTotal.toString(), i);
+    /*
     return Container(
       width: 150,
       height: 150,
@@ -327,6 +328,7 @@ class _DivoState extends State<Divo> {
         ],
       ),
     );
+    */
   }
 
   Widget buildLoadingStockTile(int i) {
@@ -337,7 +339,8 @@ class _DivoState extends State<Divo> {
 
     editAmountControllers.add(new TextEditingController());
     editSymbolControllers.add(new TextEditingController());
-
+    return stockTile(symbol, "Loading...", amount.toString(), "Loading...", i);
+    /*
     return Container(
       width: 150,
       height: 150,
@@ -374,6 +377,187 @@ class _DivoState extends State<Divo> {
           ),
           AutoSizeText(
             "Loading..../mo",
+            maxLines: 1,
+            style: GoogleFonts.rubik(
+              color: brightGreen,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+          SizedBox(
+            width: 30,
+            height: 30,
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              icon: Icon(Icons.edit),
+              color: white,
+              onPressed: () {
+                editSymbolControllers[i].text = stocks[i].toUpperCase();
+                editAmountControllers[i].text = amounts[i].toString();
+                Alert(
+                  context: context,
+                  title: "Edit Stock",
+                  desc: "Change the info below.",
+
+                  style: AlertStyle(
+                    backgroundColor: black,
+                    descStyle: GoogleFonts.lato(
+                      color: white,
+                      fontSize: 25,
+                    ),
+                    titleStyle: GoogleFonts.lato(
+                      color: white,
+                      fontSize: 35,
+                    ),
+                    alertBorder: Border.all(
+                      color: darkBrightGreen,
+                      width: 5,
+                    ),
+                  ),
+                  content: Container(
+                    child: Column(
+                      children: [
+                        TextField(
+                          style: GoogleFonts.lato(
+                            color: white,
+                            fontSize: 25,
+                          ),
+                          decoration: InputDecoration(
+                            labelText: "Symbol",
+                            labelStyle: TextStyle(color: brightGreen),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                          ),
+                          controller: editSymbolControllers[i],
+                        ),
+                        TextField(
+                          style: GoogleFonts.lato(
+                            color: white,
+                            fontSize: 25,
+                          ),
+                          decoration: InputDecoration(
+                            labelText: "Amount",
+                            labelStyle: TextStyle(color: brightGreen),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: darkBrightGreen),
+                            ),
+                          ),
+                          controller: editAmountControllers[i],
+                        ),
+                      ],
+                    ),
+                  ),
+                  buttons: [
+                    DialogButton(
+                      color: darkBrightGreen,
+                      child: Text(
+                        "Edit",
+                        style: TextStyle(color: white, fontSize: 20),
+                      ),
+                      radius: BorderRadius.circular(0.0),
+                      onPressed: () {
+                        if (editSymbolControllers[i].text != "") {
+                          stocks[i] = editSymbolControllers[i].text;
+                        }
+
+                        if (editAmountControllers[i].text != "") {
+                          amounts[i] =
+                              double.parse(editAmountControllers[i].text);
+                        }
+                        saveData();
+
+                        editSymbolControllers[i].text = "";
+                        editAmountControllers[i].text = "";
+
+                        cards = [];
+                        stockcards = [];
+                        setState(() {
+                          buildAllStockCards();
+                          setUpCards();
+                        });
+                        Navigator.pop(context);
+                      },
+
+                    ),
+                    DialogButton(
+                      color: darkBrightGreen,
+                      child: Text(
+                        "Delete",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      onPressed: () {
+                        deleteCard(i);
+
+                        setState(() {
+                          buildAllStockCards();
+                          setUpCards();
+                        });
+
+                        Navigator.pop(context);
+                      },
+                      radius: BorderRadius.circular(0.0),
+                    ),
+                  ],
+                ).show();
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+     */
+  }
+
+  Widget stockTile(String symbol, String divPerShare, String amount, String divPerMonthTotal, int i){
+    return Container(
+      width: 150,
+      height: 150,
+      decoration: BoxDecoration(
+        color: black,
+        border: Border.all(
+          width: 5,
+          color: darkBrightGreen,
+        ),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+          bottomLeft: Radius.circular(10),
+          bottomRight: Radius.circular(10),
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "$symbol",
+            style: GoogleFonts.lato(
+                color: brightGreen, fontSize: 25, fontWeight: FontWeight.bold),
+          ),
+          AutoSizeText(
+            "\$$divPerShare/share",
+            maxLines: 1,
+            style: GoogleFonts.lato(color: white),
+          ),
+          Text(
+            "$amount shares",
+            style: GoogleFonts.lato(color: white),
+          ),
+          AutoSizeText(
+            "\$$divPerMonthTotal/mo",
             maxLines: 1,
             style: GoogleFonts.rubik(
               color: brightGreen,
@@ -875,6 +1059,14 @@ class _DivoState extends State<Divo> {
     await getAllData();
     buildAllStockCards();
     setUpCards();
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
   }
 
   @override
