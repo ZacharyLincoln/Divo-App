@@ -55,6 +55,7 @@ class _DivoState extends State<Divo> {
   var first = true;
 
   Future<bool> getAllData() async {
+    
     loadedData = false;
     divRatePerShare = [];
     monthlyDivsPerShare = [];
@@ -271,8 +272,7 @@ class _DivoState extends State<Divo> {
     return stockTile(symbol, "Loading...", amount.toString(), "Loading...", i);
   }
 
-  Widget stockTile(String symbol, String divPerShare, String amount,
-      String divPerMonthTotal, int i) {
+  Widget stockTile(String symbol, String divPerShare, String amount, String divPerMonthTotal, int i) {
     return Container(
       width: 150,
       height: 150,
