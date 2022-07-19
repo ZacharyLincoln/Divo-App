@@ -84,7 +84,7 @@ class _DivoState extends State<Divo> {
 
   Future<bool> getData(int i) async {
     String symbol = stocks[i];
-    print('geting data');
+    print('getting data');
     final divCurrent =
         await http.get(Uri.parse(api + '/current_div?stock=$symbol'));
     final divMonth =
@@ -237,13 +237,10 @@ class _DivoState extends State<Divo> {
   }
 
   Widget buildStockTile(int i) {
-    var symbol =
-        stocks[i].toUpperCase(); //Sets the stock's symbol to all upper case
+    var symbol = stocks[i].toUpperCase(); //Sets the stock's symbol to all upper case
 
-    double divPerMonthTotal = amounts[i] *
-        monthlyDivsPerShare[i]; //Calculate the total monthly dividend
-    divPerMonthTotal = double.parse(divPerMonthTotal
-        .toStringAsFixed(2)); //Rounds to two digits after the decimal.
+    double divPerMonthTotal = amounts[i] * monthlyDivsPerShare[i]; //Calculate the total monthly dividend
+    divPerMonthTotal = double.parse(divPerMonthTotal.toStringAsFixed(2)); //Rounds to two digits after the decimal.
 
     double divPerShare = divRatePerShare[i];
     divPerShare = double.parse(divPerShare.toStringAsFixed(2));
@@ -273,6 +270,9 @@ class _DivoState extends State<Divo> {
   }
 
   Widget stockTile(String symbol, String divPerShare, String amount, String divPerMonthTotal, int i) {
+
+    var stockPrice = price[i];
+
     return Container(
       width: 150,
       height: 150,
@@ -299,7 +299,7 @@ class _DivoState extends State<Divo> {
                 color: brightGreen, fontSize: 25, fontWeight: FontWeight.bold),
           ),
           AutoSizeText(
-            "\$$divPerShare/share",
+            "\$$stockPrice/share",
             maxLines: 1,
             style: GoogleFonts.lato(color: white),
           ),
@@ -540,7 +540,7 @@ class _DivoState extends State<Divo> {
     //Clears the stock cards array
     stockcards = [];
 
-    //Checks to see if the infomation is loaded for a stock and either adds a stock tile or a loading stock tile.
+    //Checks to see if the information is loaded for a stock and either adds a stock tile or a loading stock tile.
     for (int i = 0; i < stocks.length; i++) {
       if (loaded[i]) {
         stockcards.add(buildStockTile(i));
