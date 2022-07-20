@@ -14,20 +14,36 @@
   <a href="#license">License</a>
 </p>
 
+<h1 align="center">
+<img src="readme_assets/screenshot.jpg" alt="Divo Logo" height="600">
+<img src="readme_assets/screenshot2.jpg" alt="Divo Logo" height="600">
+</h1>
 
 ## Key Features
 
-* Estimate Average monthly dividend estimate
-* Estimate Yearly dividend income
-* Estimate value of dividend portfolio
+* App
+  * Estimate Average monthly dividend estimate
+  * Estimate Yearly dividend income
+  * Estimate value of dividend portfolio
+  * Saves data to local device
+* Backend api
+  * Caching functionality
+
 
 
 ## Technologies Used
-* Flutter
-* Dart
-* Android
-* iOS
-
+* App
+  * Flutter
+  * Dart
+  * Android
+  * iOS
+  * Serialisation
+* Api
+  * Python
+  * Flask
+  * yahoo-finance package
+  * json
+  * Caching
 
 ## Demo
 
