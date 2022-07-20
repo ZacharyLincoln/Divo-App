@@ -1,16 +1,44 @@
-# divo
+<h1 align="center">
+  <br>
+  <img src="readme_assets/logo.png" alt="Divo Logo" width="200">
+  <br>
+  Divo
+  <br>
+</h1>
 
-A new Flutter project.
+<h4 align="center">A simple yet useful monthly dividend estimate calculator</h4>
 
-## Getting Started
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#demo">Demo</a> •
+  <a href="#license">License</a>
+</p>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Key Features
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+* Estimate Average monthly dividend estimate
+* Estimate Yearly dividend income
+* Estimate value of dividend portfolio
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Technologies Used
+* Flutter
+* Dart
+* Android
+* iOS
+
+
+## Demo
+
+![screenshot](./readme_assets/demo.gif)
+
+
+## License
+
+MIT
+
+---
+> [zlincoln.dev](https://www.zlincoln.dev) &nbsp;&middot;&nbsp;
+> GitHub [@ZacharyLincoln](https://github.com/ZacharyLincoln)
+
