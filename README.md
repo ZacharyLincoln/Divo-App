@@ -20,30 +20,21 @@
 </h1>
 
 ## Key Features
+* Estimate Average monthly dividend estimate
+* Estimate Yearly dividend income
+* Estimate value of dividend portfolio
+* Saves data to local device
 
-* App
-  * Estimate Average monthly dividend estimate
-  * Estimate Yearly dividend income
-  * Estimate value of dividend portfolio
-  * Saves data to local device
-* Backend api
-  * Caching functionality
 
 
 
 ## Technologies Used
-* App
-  * Flutter
-  * Dart
-  * Android
-  * iOS
-  * Serialisation
-* Api
-  * Python
-  * Flask
-  * yahoo-finance package
-  * json
-  * Caching
+
+* Flutter
+* Dart
+* Android
+* iOS
+* Serialisation
 
 ## Demo
 
