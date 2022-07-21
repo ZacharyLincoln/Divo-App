@@ -47,8 +47,10 @@
 
 ## Demo
 
-![screenshot](./readme_assets/demo.gif)
+<h1 align="center">
+<img src="readme_assets/demo.gif" alt="Divo Logo" height="600">
 
+</h1>
 
 ## License
 
